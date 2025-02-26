@@ -1,0 +1,29 @@
+I am trying to test the following hypotheses:
+If you train a simple convolution network to classify the MNIST dataset but train it on the original MNIST train set
+augmented by scrambled copies of the images in the original dataset:
+
+- It will converge faster
+- It will be more robust to adversarial inputs
+- It will generalize better to out-of-distribution images
+
+I am using dvc to set up the download, data augmentation, training and evaluation stages. 
+
+I'd like to organize the code into these files:
+
+- config.py that load all project configuration from a json file into a pydantic model. 
+  The config will have things like the URL of the Kaggle dataset and the path to kaggle token key file and other config that we need for this project
+- download.py with two method download_mnist_train() and download_mnist_test() to download the data from KaggleHub into ./data/train/raw ./data/test/raw
+- augment.py with a method named scramble() that generates 1-5 scrambled copies of the original data and saves them into ./data/train/scrambled. And another method named augment() that saves 
+the augmented data to ./data/train/augmented
+
+- hyper.json that has all hyper parameters for the project
+- network.py that defines the network 
+- dataloader.py that loads the train and test sets
+- metrics.py with appropriate metric functions
+- train.py with a method named train() that trains and validates on splits of the train set (size controlled via hyperparams)
+- test.py with a method name evaluate() that evaluates the network on the test set
+- A cli.py file that use the typer package to define all entry-points for dvc (see below)
+- dvc.yaml that defines the stages for the whole experiment
+
+Use an appropriate neural network that is known to work well with the dataset. 
+Set sensible defaults for the hyperparameters.
