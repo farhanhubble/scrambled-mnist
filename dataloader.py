@@ -4,7 +4,10 @@ from torch.utils.data import DataLoader
 from config import config
 
 def get_dataloaders():
-    transform = transforms.Compose([transforms.ToTensor()])
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))  # MNIST normalization
+    ])
     
     train_set = datasets.ImageFolder(root=config.data_dir + "/train/augmented", transform=transform)
     test_set = datasets.ImageFolder(root=config.data_dir + "/test/raw", transform=transform)
