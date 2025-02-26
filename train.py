@@ -3,16 +3,22 @@ import torch.optim as optim
 import torch.nn as nn
 from dataloader import get_dataloaders
 from network import CNN
-from config import config
+import json
+
+def load_hyperparameters():
+    with open("hyper.json", "r") as f:
+        return json.load(f)
+
+hyperparams = load_hyperparameters()
 
 def train():
     train_loader, _ = get_dataloaders()
     
     model = CNN()
-    optimizer = optim.Adam(model.parameters(), lr=config.learning_rate)
+    optimizer = optim.Adam(model.parameters(), lr=hyperparams["learning_rate"])
     criterion = nn.CrossEntropyLoss()
 
-    for epoch in range(config.num_epochs):
+    for epoch in range(hyperparams["num_epochs"]):
         model.train()
         total_loss = 0
 

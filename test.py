@@ -1,7 +1,6 @@
 import torch
 from network import CNN
 from dataloader import get_dataloaders
-from config import config
 
 def evaluate():
     _, test_loader = get_dataloaders()
