@@ -1,5 +1,5 @@
 [project]
-name = "y"
+name = "scramble-mnist"
 version = "0.1.0"
 description = "Train deep neural net on MNIST + scrambled MNIST"
 authors = [
