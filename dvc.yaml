@@ -1,28 +1,78 @@
 stages:
-  download_train:
-    cmd: python cli.py download-train
-    outs:
-      - data/train/raw/train.csv
-  download_test:
-    cmd: python cli.py download-test
-    outs:
-      - data/test/raw/test.csv
-  augment:
-    cmd: python cli.py augment-data
+  setup:
+    cmd: python cli.py setup
     deps:
-      - data/train/raw/train.csv
-    outs:
-      - data/train/scrambled
-      - data/train/augmented
-  train:
-    cmd: python cli.py train-model
-    deps:
-      - data/train/augmented
       - hyper.json
     outs:
-      - models/model.pth
-  evaluate:
-    cmd: python cli.py evaluate-model
+      - config_used.json
+  
+  download:
+    cmd: python cli.py download
     deps:
-      - models/model.pth
-      - data/test/raw/test.csv
+      - download.py
+      - config.py
+      - hyper.json
+    outs:
+      - data/train/raw:
+          persist: true
+      - data/test/raw:
+          persist: true
+  
+  scramble:
+    cmd: python cli.py create-scrambled
+    deps:
+      - augment.py
+      - config.py
+      - hyper.json
+      - data/train/raw
+    outs:
+      - data/train/scrambled
+  
+  augment:
+    cmd: python cli.py create-augmented
+    deps:
+      - augment.py
+      - config.py
+      - hyper.json
+      - data/train/raw
+      - data/train/scrambled
+    outs:
+      - data/train/augmented
+  
+  train_original:
+    cmd: python cli.py train-model --model-type robust --experiment-name original
+    deps:
+      - train.py
+      - network.py
+      - dataloader.py
+      - metrics.py
+      - config.py
+      - hyper.json
+      - data/train/raw
+      - data/test/raw
+    outs:
+      - models/original.h5
+      - checkpoints/original
+    metrics:
+      - metrics/original_metrics.json:
+          cache: false
+    plots:
+      - metrics/original_training_curves.png:
+          cache: false
+  
+  train_augmented:
+    cmd: python cli.py train-model --model-type robust --experiment-name augmented
+    deps:
+      - train.py
+      - network.py
+      - dataloader.py
+      - metrics.py
+      - config.py
+      - hyper.json
+      - data/train/augmented
+      - data/test/raw
+    outs:
+      - models/augmented.h5
+      - checkpoints/augmented
+    metrics:
+      - metrics/augmented_metrics.json

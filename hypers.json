@@ -1,8 +1,28 @@
 {
-    "learning_rate": 0.001,
-    "batch_size": 64,
-    "epochs": 20,
-    "train_split": 0.8,
-    "momentum": 0.9,
-    "weight_decay": 0.0001
-}
+    "training": {
+      "batch_size": 128,
+      "learning_rate": 0.001,
+      "epochs": 30,
+      "validation_split": 0.2,
+      "early_stopping_patience": 5,
+      "optimizer": "adam",
+      "loss": "sparse_categorical_crossentropy"
+    },
+    "data": {
+      "kaggle_dataset": "zalando-research/fashionmnist",
+      "kaggle_credentials_path": "~/.kaggle/kaggle.json",
+      "data_dir": "./data",
+      "train_raw_dir": "./data/train/raw",
+      "test_raw_dir": "./data/test/raw", 
+      "train_scrambled_dir": "./data/train/scrambled",
+      "train_augmented_dir": "./data/train/augmented",
+      "num_scrambled_copies": 3
+    },
+    "model": {
+      "model_dir": "./models",
+      "checkpoint_dir": "./checkpoints",
+      "input_shape": [28, 28, 1],
+      "num_classes": 10
+    },
+    "random_seed": 42
+  }
