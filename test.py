@@ -1,19 +1,18 @@
 import torch
-from network import CNN
-from dataloader import get_dataloaders
-from config import config
+from network import get_model
+from dataloader import load_data
+from metrics import accuracy, robustness_to_adversarial
+from config import CONFIG
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def evaluate():
-    _, test_loader = get_dataloaders()
-    model = CNN()
+    model = get_model().to(device)
+    model.load_state_dict(torch.load(CONFIG.model_save_path))
     model.eval()
-
-    correct, total = 0, 0
-    with torch.no_grad():
-        for images, labels in test_loader:
-            outputs = model(images)
-            _, predicted = torch.max(outputs, 1)
-            correct += (predicted == labels).sum().item()
-            total += labels.size(0)
-
-    print(f"Accuracy: {100 * correct / total:.2f}%")
+    
+    _, _, test_loader = load_data()
+    
+    # Standard accuracy (note: no labels in Kaggle test set, so this is for adversarial testing)
+    robustness = robustness_to_adversarial(model, test_loader)
+    print(f"Adversarial Robustness (epsilon=0.1): {robustness:.4f}")

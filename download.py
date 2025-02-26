@@ -1,11 +1,13 @@
+import kagglehub
+from config import CONFIG
 import os
-import kaggle
-from config import config
 
 def download_mnist_train():
-    os.makedirs(config.data_dir + "/train/raw", exist_ok=True)
-    kaggle.api.dataset_download_files(config.kaggle_url, path=config.data_dir + "/train/raw", unzip=True)
+    os.makedirs(CONFIG.train_raw_dir, exist_ok=True)
+    kagglehub.login(CONFIG.kaggle_key_path)
+    kagglehub.dataset_download("digit-recognizer", path=CONFIG.train_raw_dir, subset="train.csv")
 
 def download_mnist_test():
-    os.makedirs(config.data_dir + "/test/raw", exist_ok=True)
-    kaggle.api.dataset_download_files(config.kaggle_url, path=config.data_dir + "/test/raw", unzip=True)
+    os.makedirs(CONFIG.test_raw_dir, exist_ok=True)
+    kagglehub.login(CONFIG.kaggle_key_path)
+    kagglehub.dataset_download("digit-recognizer", path=CONFIG.test_raw_dir, subset="test.csv")

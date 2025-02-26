@@ -1,26 +1,28 @@
 stages:
-  download:
-    cmd: python cli.py download
+  download_train:
+    cmd: python cli.py download-train
     outs:
-      - data/train/raw
-      - data/test/raw
-
+      - data/train/raw/train.csv
+  download_test:
+    cmd: python cli.py download-test
+    outs:
+      - data/test/raw/test.csv
   augment:
-    cmd: python cli.py data_augment
+    cmd: python cli.py augment-data
     deps:
-      - data/train/raw
+      - data/train/raw/train.csv
     outs:
+      - data/train/scrambled
       - data/train/augmented
-
   train:
-    cmd: python cli.py run_train
+    cmd: python cli.py train-model
     deps:
       - data/train/augmented
+      - hyper.json
     outs:
-      - model.pth
-
-  test:
-    cmd: python cli.py run_test
+      - models/model.pth
+  evaluate:
+    cmd: python cli.py evaluate-model
     deps:
-      - model.pth
-      - data/test/raw
+      - models/model.pth
+      - data/test/raw/test.csv

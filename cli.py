@@ -7,20 +7,23 @@ from test import evaluate
 app = typer.Typer()
 
 @app.command()
-def download():
+def download_train():
     download_mnist_train()
+
+@app.command()
+def download_test():
     download_mnist_test()
 
 @app.command()
-def data_augment():
+def augment_data():
     augment()
 
 @app.command()
-def run_train():
+def train_model():
     train()
 
 @app.command()
-def run_test():
+def evaluate_model():
     evaluate()
 
 if __name__ == "__main__":
