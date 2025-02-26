@@ -1,5 +1,6 @@
 [project]
 name = "scramble-mnist"
+package-mode = false
 version = "0.1.0"
 description = "Train deep neural net on MNIST + scrambled MNIST"
 authors = [
@@ -9,6 +10,7 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "dvc[ssh] (>=3.59.1,<4.0.0)"
 ]
 
 
