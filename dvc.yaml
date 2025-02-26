@@ -1,0 +1,26 @@
+stages:
+  download:
+    cmd: python cli.py download
+    outs:
+      - data/train/raw
+      - data/test/raw
+
+  augment:
+    cmd: python cli.py data_augment
+    deps:
+      - data/train/raw
+    outs:
+      - data/train/augmented
+
+  train:
+    cmd: python cli.py run_train
+    deps:
+      - data/train/augmented
+    outs:
+      - model.pth
+
+  test:
+    cmd: python cli.py run_test
+    deps:
+      - model.pth
+      - data/test/raw
