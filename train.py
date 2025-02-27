@@ -4,25 +4,40 @@ import torch.nn as nn
 from dataloader import get_dataloaders
 from network import CNN
 import json
+from tqdm import tqdm
+from config import config
+import os
+
 
 def load_hyperparameters():
     with open("hypers.json", "r") as f:
         return json.load(f)
 
+
 hyperparams = load_hyperparameters()
+
 
 def train():
     train_loader, _ = get_dataloaders()
-    
+
     model = CNN()
     optimizer = optim.Adam(model.parameters(), lr=hyperparams["learning_rate"])
     criterion = nn.CrossEntropyLoss()
 
-    for epoch in range(hyperparams["num_epochs"]):
+    progress = tqdm(
+        range(hyperparams["num_epochs"]),
+        desc="Training",
+        position=0,
+        unit="epoch",
+    )
+    for epoch in progress:
         model.train()
         total_loss = 0
 
-        for images, labels in train_loader:
+        for images, labels in tqdm(
+            train_loader, desc="Training batch", leave=False, position=1, unit="batch"
+        ):
+            progress.set_postfix(training_loss=total_loss)
             optimizer.zero_grad()
             output = model(images)
             loss = criterion(output, labels)
@@ -30,4 +45,5 @@ def train():
             optimizer.step()
             total_loss += loss.item()
 
-        print(f"Epoch {epoch+1}, Loss: {total_loss:.4f}")
+    os.makedirs(config.saved_model_dir, exist_ok=True)
+    torch.save(model.state_dict(), config.saved_model_dir + "/" + config.model_name)
