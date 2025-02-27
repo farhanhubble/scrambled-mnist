@@ -3,6 +3,7 @@ from config import config
 from convert import csv_to_images
 from download import download_mnist_train, download_mnist_test, set_auth
 from augment import augment as augment_data
+import seed
 from train import train
 from test import evaluate
 
