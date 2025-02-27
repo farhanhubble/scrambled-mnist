@@ -1396,6 +1396,29 @@ dev = ["mypy (==1.11.2)", "pylint (==2.15.0)", "pytest (==7.2.0)", "pytest-cov (
 tests = ["mypy (==1.11.2)", "pylint (==2.15.0)", "pytest (==7.2.0)", "pytest-cov (==3.0.0)", "pytest-mock (==3.8.2)", "pytest-sugar (==0.9.5)", "types-requests"]
 
 [[package]]
+name = "kagglehub"
+version = "0.3.10"
+description = "Access Kaggle resources anywhere"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "kagglehub-0.3.10-py3-none-any.whl", hash = "sha256:82a204e77919da54021038971ed735450c91ea479c5c003d140a22503bc20981"},
+    {file = "kagglehub-0.3.10.tar.gz", hash = "sha256:7df4238eea20817bce13bfacbe79ff4c0a583a9e876bfaf16d7ad6179611fb7c"},
+]
+
+[package.dependencies]
+packaging = "*"
+pyyaml = "*"
+requests = "*"
+tqdm = "*"
+
+[package.extras]
+hf-datasets = ["datasets", "pandas"]
+pandas-datasets = ["pandas"]
+signing = ["betterproto (>=2.0.0b6)", "model-signing", "sigstore (>=3.6.1)"]
+
+[[package]]
 name = "kombu"
 version = "5.4.2"
 description = "Messaging library for Python."
@@ -2794,4 +2817,4 @@ test = ["zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "7a5cb7cbec8077eb32e73fcde733da6ba71bc73aa250d598e5f09f379f80fa2d"
+content-hash = "204e386d19d834138b6c6bcc8775e13394e66da484dedf2aac3510330ccbd1e7"
