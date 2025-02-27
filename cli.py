@@ -2,7 +2,7 @@ import typer
 from config import config
 from convert import csv_to_images
 from download import download_mnist_train, download_mnist_test, set_auth
-from augment import augment
+from augment import augment as augment_data
 from train import train
 from test import evaluate
 
@@ -29,8 +29,12 @@ def download():
 
 
 @app.command(help="Augment MNIST data with scrambled images")
-def data_augment():
-    augment()
+def augment():
+    augment_data(
+        config.data_dir + "/train/converted",
+        config.data_dir + "/train/augmented",
+        config.scrambled_copies,
+    )
 
 
 @app.command(help="Train the model")

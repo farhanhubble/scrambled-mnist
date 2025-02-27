@@ -10,6 +10,7 @@ class Config(BaseModel):
     kaggle_token_file: FilePath
     data_dir: str
     seed: int
+    scrambled_copies: int
 
 
 def load_config(path="config.json") -> Config:

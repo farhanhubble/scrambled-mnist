@@ -4,5 +4,6 @@
     "kaggle_mnist_test_file": "mnist_test.csv",
     "kaggle_token_file": "./.secrets/kaggle.json",
     "data_dir": "./data",
-    "seed": 57005
+    "seed": 57005,
+    "scrambled_copies": 1
 }
