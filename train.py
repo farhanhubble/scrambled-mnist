@@ -6,7 +6,7 @@ from network import CNN
 import json
 
 def load_hyperparameters():
-    with open("hyper.json", "r") as f:
+    with open("hypers.json", "r") as f:
         return json.load(f)
 
 hyperparams = load_hyperparameters()
