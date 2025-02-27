@@ -13,11 +13,11 @@ app = typer.Typer()
 def convert():
     csv_to_images(
         config.data_dir + "/train/raw/" + config.kaggle_mnist_train_file,
-        config.data_dir + "train/converted",
+        config.data_dir + "/train/converted",
     )
     csv_to_images(
-        config.data_dir + "/test/raw/+" + config.kaggle_mnist_test_file,
-        config.data_dir + "test/converted",
+        config.data_dir + "/test/raw/" + config.kaggle_mnist_test_file,
+        config.data_dir + "/test/converted",
     )
 
 

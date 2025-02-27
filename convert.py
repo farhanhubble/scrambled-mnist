@@ -7,6 +7,11 @@ from tqdm import tqdm
 import argparse
 
 
+def _skip_header(reader):
+    # Skip the header
+    next(reader)
+
+
 def csv_to_images(csv_path: str, output_dir: str):
     """
     Converts MNIST CSV data (785 columns per row: label + 784 pixels)
@@ -20,6 +25,7 @@ def csv_to_images(csv_path: str, output_dir: str):
 
     with open(csv_path, "r") as f:
         reader = csv.reader(f)
+        _skip_header(reader)
         data = list(reader)
 
     for i, row in tqdm(enumerate(data), total=len(data)):
