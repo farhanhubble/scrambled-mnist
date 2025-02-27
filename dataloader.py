@@ -16,7 +16,7 @@ def get_dataloaders():
     ])
     
     train_set = datasets.ImageFolder(root="data/train/augmented", transform=transform)
-    test_set = datasets.ImageFolder(root="data/test/raw", transform=transform)
+    test_set = datasets.ImageFolder(root="data/test/converted", transform=transform)
 
     train_loader = DataLoader(train_set, batch_size=hyperparams["batch_size"], shuffle=True)
     test_loader = DataLoader(test_set, batch_size=hyperparams["batch_size"], shuffle=False)

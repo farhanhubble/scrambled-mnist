@@ -4,8 +4,8 @@ from convert import csv_to_images
 from download import download_mnist_train, download_mnist_test, set_auth
 from augment import augment as augment_data
 from seed import seed
-from train import train
-from test import evaluate
+from train import train as do_train
+from test import evaluate as do_evaluate
 
 seed()
 app = typer.Typer()
@@ -41,13 +41,13 @@ def augment():
 
 
 @app.command(help="Train the model")
-def run_train():
-    train()
+def train():
+    do_train()
 
 
 @app.command(help="Evaluate the model")
-def run_test():
-    evaluate()
+def test():
+    do_evaluate()
 
 
 if __name__ == "__main__":
