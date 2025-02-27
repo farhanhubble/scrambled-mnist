@@ -5,10 +5,19 @@ stages:
       - data/train/raw
       - data/test/raw
 
+  convert:
+    cmd: python cli.py convert
+    deps:
+      - data/train/raw
+      - data/test/raw
+    outs:
+      - data/train/converted
+      - data/test/converted
+
   augment:
     cmd: python cli.py data_augment
     deps:
-      - data/train/raw
+      - data/train/converted
     outs:
       - data/train/augmented
 
