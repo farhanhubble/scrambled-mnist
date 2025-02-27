@@ -12,7 +12,7 @@ app = typer.Typer()
 @app.command(help="Convert MNIST CSV data to PNG images.")
 def convert():
     csv_to_images(
-        config.data_dir + "/train/raw/+" + config.kaggle_mnist_train_file,
+        config.data_dir + "/train/raw/" + config.kaggle_mnist_train_file,
         config.data_dir + "train/converted",
     )
     csv_to_images(
