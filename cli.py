@@ -9,7 +9,7 @@ from test import evaluate
 app = typer.Typer()
 
 
-@app.command()
+@app.command(help="Convert MNIST CSV data to PNG images.")
 def convert():
     csv_to_images(
         config.data_dir + "/train/raw/+" + config.kaggle_mnist_train_file,
@@ -21,24 +21,24 @@ def convert():
     )
 
 
-@app.command()
+@app.command(help="Download MNIST data from Kaggle.")
 def download():
     set_auth()
     download_mnist_train()
     download_mnist_test()
 
 
-@app.command()
+@app.command(help="Augment MNIST data with scrambled images")
 def data_augment():
     augment()
 
 
-@app.command()
+@app.command(help="Train the model")
 def run_train():
     train()
 
 
-@app.command()
+@app.command(help="Evaluate the model")
 def run_test():
     evaluate()
 
