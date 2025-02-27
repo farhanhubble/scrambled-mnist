@@ -35,6 +35,7 @@ def augment():
         config.data_dir + "/train/converted",
         config.data_dir + "/train/augmented",
         config.scrambled_copies,
+        config.scramble_fraction,
     )
 
 

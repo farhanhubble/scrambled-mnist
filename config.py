@@ -11,6 +11,7 @@ class Config(BaseModel):
     data_dir: str
     seed: int
     scrambled_copies: int
+    scramble_fraction: float
 
 
 def load_config(path="config.json") -> Config:
