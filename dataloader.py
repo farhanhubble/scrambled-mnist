@@ -11,6 +11,7 @@ hyperparams = load_hyperparameters()
 
 def get_dataloaders():
     transform = transforms.Compose([
+        transforms.Grayscale(num_output_channels=1),
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,))  # MNIST normalization
     ])
