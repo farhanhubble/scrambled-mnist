@@ -14,6 +14,7 @@ class Config(BaseModel):
     scramble_fraction: float
     saved_model_dir: str
     model_name: str
+    report_file: str
 
 
 def load_config(path="config.json") -> Config:

@@ -7,7 +7,7 @@ import json
 from tqdm import tqdm
 from config import config
 import os
-
+from datetime import datetime
 
 def load_hyperparameters():
     with open("hypers.json", "r") as f:
@@ -30,6 +30,9 @@ def train():
         position=0,
         unit="epoch",
     )
+    start = datetime.now()
+    with open(config.report_file, "w") as f:
+        f.write(f"Training started at {start}\n")
     for epoch in progress:
         model.train()
         total_loss = 0
@@ -44,6 +47,9 @@ def train():
             loss.backward()
             optimizer.step()
             total_loss += loss.item()
+
+        with open(config.report_file, "a") as f:
+            f.write(f"[{datetime.now()}] Epoch {epoch} loss: {total_loss}\n")
 
     os.makedirs(config.saved_model_dir, exist_ok=True)
     torch.save(model.state_dict(), config.saved_model_dir + "/" + config.model_name)

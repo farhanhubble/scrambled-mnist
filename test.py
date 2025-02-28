@@ -3,6 +3,7 @@ from network import CNN
 from config import config
 from dataloader import get_dataloaders
 from tqdm import tqdm
+from datetime import datetime
 
 def evaluate():
     _, test_loader = get_dataloaders()
@@ -11,6 +12,8 @@ def evaluate():
     model.eval()
 
     correct, total = 0, 0
+    with open(config.report_file, "w") as f:
+        f.write(f"Testting started at {datetime.now()}\n")
     with torch.no_grad():
         for images, labels in tqdm(test_loader, desc="Evaluating", unit="batch"):
             outputs = model(images)
@@ -18,4 +21,7 @@ def evaluate():
             correct += (predicted == labels).sum().item()
             total += labels.size(0)
 
-    print(f"Accuracy: {100 * correct / total:.2f}%")
+    test_accuracy = 100 * correct / total
+    print(f"Accuracy: {test_accuracy:.2f}%")
+    with open(config.report_file, "w") as f:
+        f.write(f"[{datetime.datetime.now()}] Test accuracy: {test_accuracy}\n")
