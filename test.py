@@ -13,7 +13,7 @@ def evaluate():
 
     correct, total = 0, 0
     with open(config.report_file, "a") as f:
-        f.write(f"Testting started at {datetime.now()}\n")
+        f.write(f"[{datetime.now()}] Testting started\n")
     with torch.no_grad():
         for images, labels in tqdm(test_loader, desc="Evaluating", unit="batch"):
             outputs = model(images)
@@ -24,4 +24,4 @@ def evaluate():
     test_accuracy = 100 * correct / total
     print(f"Accuracy: {test_accuracy:.2f}%")
     with open(config.report_file, "a") as f:
-        f.write(f"[{datetime.datetime.now()}] Test accuracy: {test_accuracy}\n")
+        f.write(f"[{datetime.now()}] Test accuracy: {test_accuracy}\n")

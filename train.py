@@ -32,7 +32,7 @@ def train():
     )
     start = datetime.now()
     with open(config.report_file, "w") as f:
-        f.write(f"Training started at {start}\n")
+        f.write(f"[{datetime.now()}] Training started\n")
     for epoch in progress:
         model.train()
         total_loss = 0
