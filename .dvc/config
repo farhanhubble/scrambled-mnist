@@ -1,4 +1,4 @@
 [core]
     remote = remotestore
 ['remote "remotestore"']
-    url = /storage/dvc/scrambled_mnist
+    url = /storage/devel/dvcstore/scrambledmnist
