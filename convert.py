@@ -2,10 +2,7 @@
 import os
 import csv
 from PIL import Image
-import numpy as np
 from tqdm import tqdm
-import argparse
-
 
 def _skip_header(reader):
     # Skip the header
