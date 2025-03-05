@@ -37,7 +37,7 @@ stages:
     deps:
       - data/train/augmented
     outs:
-      - saved-models/scrambled_mnist.pth
+      - saved_models/scrambled_mnist.pth
     metrics:
       - report.txt:
           cache: false
@@ -45,5 +45,5 @@ stages:
   test:
     cmd: python cli.py test
     deps:
-      - saved-models/scrambled_mnist.pth
+      - saved_models/scrambled_mnist.pth
       - data/test/raw
