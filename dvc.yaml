@@ -1,6 +1,12 @@
 stages:
   download:
     cmd: python cli.py download
+    params:
+      - config.json:
+        - kaggle_mnist_handle
+        - kaggle_mnist_train_file
+        - kaggle_mnist_test_file
+        - kaggle_token_file
     outs:
       - data/train/raw
       - data/test/raw
@@ -15,21 +21,29 @@ stages:
       - data/test/converted
 
   augment:
-    cmd: python cli.py data_augment
+    cmd: python cli.py augment
     deps:
       - data/train/converted
+    params:
+      - config.json:
+        - seed
+        - scrambled_copies
+        - scramble_fraction
     outs:
       - data/train/augmented
 
   train:
-    cmd: python cli.py run_train
+    cmd: python cli.py train
     deps:
       - data/train/augmented
     outs:
-      - model.pth
+      - saved-models/scrambled_mnist.pth
+    metrics:
+      - report.txt:
+          cache: false
 
   test:
-    cmd: python cli.py run_test
+    cmd: python cli.py test
     deps:
-      - model.pth
+      - saved-models/scrambled_mnist.pth
       - data/test/raw
