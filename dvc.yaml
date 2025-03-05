@@ -1,6 +1,9 @@
 stages:
   download:
     cmd: python cli.py download
+    deps:
+      - cli.py
+      - download.py
     params:
       - config.json:
         - kaggle_mnist_handle
@@ -14,6 +17,8 @@ stages:
   convert:
     cmd: python cli.py convert
     deps:
+      - cli.py
+      - convert.py
       - data/train/raw
       - data/test/raw
     outs:
@@ -24,6 +29,8 @@ stages:
     cmd: python cli.py augment
     deps:
       - data/train/converted
+      - augment.py
+      - cli.py
     params:
       - config.json:
         - seed
@@ -36,14 +43,17 @@ stages:
     cmd: python cli.py train
     deps:
       - data/train/augmented
+      - dataloader.py
+      - network.py
+      - train.py
     outs:
       - saved_models/scrambled_mnist.pth
-    metrics:
-      - report.txt:
-          cache: false
 
   test:
     cmd: python cli.py test
     deps:
       - saved_models/scrambled_mnist.pth
       - data/test/raw
+      - dataloader.py
+      - network.py
+      - test.py

@@ -2,6 +2,15 @@ schema: '2.0'
 stages:
   download:
     cmd: python cli.py download
+    deps:
+    - path: cli.py
+      hash: md5
+      md5: 33dfb98290267ebb91eec8a20037ae4f
+      size: 1260
+    - path: download.py
+      hash: md5
+      md5: 0c788e391dbe4894b3b137246bc90ea8
+      size: 819
     params:
       config.json:
         kaggle_mnist_handle: oddrationale/mnist-in-csv
@@ -22,6 +31,14 @@ stages:
   convert:
     cmd: python cli.py convert
     deps:
+    - path: cli.py
+      hash: md5
+      md5: 33dfb98290267ebb91eec8a20037ae4f
+      size: 1260
+    - path: convert.py
+      hash: md5
+      md5: ebad11d340680a65f667bb81da75897e
+      size: 1212
     - path: data/test/raw
       hash: md5
       md5: 3e6db7925e066617ce9b49d79795e422.dir
@@ -46,6 +63,14 @@ stages:
   augment:
     cmd: python cli.py augment
     deps:
+    - path: augment.py
+      hash: md5
+      md5: 8bac0a10f6a1981ab72d518c44463ae1
+      size: 2780
+    - path: cli.py
+      hash: md5
+      md5: 33dfb98290267ebb91eec8a20037ae4f
+      size: 1260
     - path: data/train/converted
       hash: md5
       md5: d1bc4c2136fd04dc8f2083fd5581d695.dir
@@ -59,25 +84,33 @@ stages:
     outs:
     - path: data/train/augmented
       hash: md5
-      md5: 3161405853480ab44760cca31aac8991.dir
-      size: 18567231
+      md5: a6ad99d63915811890d4023ee1b48f24.dir
+      size: 18567749
       nfiles: 65996
   train:
     cmd: python cli.py train
     deps:
     - path: data/train/augmented
       hash: md5
-      md5: 3161405853480ab44760cca31aac8991.dir
-      size: 18567231
+      md5: a6ad99d63915811890d4023ee1b48f24.dir
+      size: 18567749
       nfiles: 65996
-    outs:
-    - path: report.txt
+    - path: dataloader.py
       hash: md5
-      md5: da1edef8af4470fc58c9eebbd9b3297f
-      size: 754
+      md5: 3ae144523b2069bf51270bc9cb1b1f74
+      size: 872
+    - path: network.py
+      hash: md5
+      md5: 29c88f08e0cd51dea485cf9b0f61769b
+      size: 574
+    - path: train.py
+      hash: md5
+      md5: b7c93e239a431f78c7377de843fd4d7b
+      size: 1565
+    outs:
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 0cc5db93af2f3c8a97cde6a64bd5410f
+      md5: 6a43975bfc8dc116991480f903a245b6
       size: 25774752
   test:
     cmd: python cli.py test
@@ -87,7 +120,19 @@ stages:
       md5: 3e6db7925e066617ce9b49d79795e422.dir
       size: 18303650
       nfiles: 1
+    - path: dataloader.py
+      hash: md5
+      md5: 3ae144523b2069bf51270bc9cb1b1f74
+      size: 872
+    - path: network.py
+      hash: md5
+      md5: 29c88f08e0cd51dea485cf9b0f61769b
+      size: 574
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 0cc5db93af2f3c8a97cde6a64bd5410f
+      md5: 6a43975bfc8dc116991480f903a245b6
       size: 25774752
+    - path: test.py
+      hash: md5
+      md5: d2c2acf471d08a2e9022b50bfd12f3f0
+      size: 955
