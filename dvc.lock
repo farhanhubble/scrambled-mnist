@@ -1,0 +1,93 @@
+schema: '2.0'
+stages:
+  download:
+    cmd: python cli.py download
+    params:
+      config.json:
+        kaggle_mnist_handle: oddrationale/mnist-in-csv
+        kaggle_mnist_test_file: mnist_test.csv
+        kaggle_mnist_train_file: mnist_train.csv
+        kaggle_token_file: ./.secrets/kaggle.json
+    outs:
+    - path: data/test/raw
+      hash: md5
+      md5: 3e6db7925e066617ce9b49d79795e422.dir
+      size: 18303650
+      nfiles: 1
+    - path: data/train/raw
+      hash: md5
+      md5: db3fcf22ca5bc8e382bcc384a3310090.dir
+      size: 109640201
+      nfiles: 1
+  convert:
+    cmd: python cli.py convert
+    deps:
+    - path: data/test/raw
+      hash: md5
+      md5: 3e6db7925e066617ce9b49d79795e422.dir
+      size: 18303650
+      nfiles: 1
+    - path: data/train/raw
+      hash: md5
+      md5: db3fcf22ca5bc8e382bcc384a3310090.dir
+      size: 109640201
+      nfiles: 1
+    outs:
+    - path: data/test/converted
+      hash: md5
+      md5: d4c8cb964a18b7bc45ed6e1862d4ff41.dir
+      size: 2755182
+      nfiles: 10000
+    - path: data/train/converted
+      hash: md5
+      md5: d1bc4c2136fd04dc8f2083fd5581d695.dir
+      size: 16503300
+      nfiles: 60000
+  augment:
+    cmd: python cli.py augment
+    deps:
+    - path: data/train/converted
+      hash: md5
+      md5: d1bc4c2136fd04dc8f2083fd5581d695.dir
+      size: 16503300
+      nfiles: 60000
+    params:
+      config.json:
+        scramble_fraction: 0.1
+        scrambled_copies: 1
+        seed: 57005
+    outs:
+    - path: data/train/augmented
+      hash: md5
+      md5: 3161405853480ab44760cca31aac8991.dir
+      size: 18567231
+      nfiles: 65996
+  train:
+    cmd: python cli.py train
+    deps:
+    - path: data/train/augmented
+      hash: md5
+      md5: 3161405853480ab44760cca31aac8991.dir
+      size: 18567231
+      nfiles: 65996
+    outs:
+    - path: report.txt
+      hash: md5
+      md5: da1edef8af4470fc58c9eebbd9b3297f
+      size: 754
+    - path: saved_models/scrambled_mnist.pth
+      hash: md5
+      md5: 0cc5db93af2f3c8a97cde6a64bd5410f
+      size: 25774752
+  test:
+    cmd: python cli.py test
+    deps:
+    - path: data/test/raw
+      hash: md5
+      md5: 3e6db7925e066617ce9b49d79795e422.dir
+      size: 18303650
+      nfiles: 1
+    - path: saved_models/scrambled_mnist.pth
+      hash: md5
+      md5: 0cc5db93af2f3c8a97cde6a64bd5410f
+      size: 25774752
