@@ -42,7 +42,7 @@ stages:
   train:
     cmd: python cli.py train
     deps:
-      - data/train/augmented
+      - data/train/converted
       - dataloader.py
       - network.py
       - train.py

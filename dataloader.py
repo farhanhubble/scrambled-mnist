@@ -23,7 +23,7 @@ def get_dataloaders():
         transforms.Normalize((0.1307,), (0.3081,))  # MNIST normalization
     ])
     
-    train_set = datasets.ImageFolder(root="data/train/augmented", transform=transform)
+    train_set = datasets.ImageFolder(root="data/train/converted", transform=transform)
     test_set = datasets.ImageFolder(root="data/test/converted", transform=transform)
 
     train_set.class_to_idx = class2idx
