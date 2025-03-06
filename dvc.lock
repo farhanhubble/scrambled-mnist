@@ -78,23 +78,23 @@ stages:
       nfiles: 60000
     params:
       config.json:
-        scramble_fraction: 0.005
+        scramble_fraction: 0.1
         scrambled_copies: 1
         seed: 57005
     outs:
     - path: data/train/augmented
       hash: md5
-      md5: 3cda99f0f8814fd1c54de310591bf819.dir
-      size: 16604885
-      nfiles: 60295
+      md5: 09e45c598c24e26653c4bc4773060e73.dir
+      size: 18567355
+      nfiles: 65996
   train:
     cmd: python cli.py train
     deps:
     - path: data/train/augmented
       hash: md5
-      md5: 3cda99f0f8814fd1c54de310591bf819.dir
-      size: 16604885
-      nfiles: 60295
+      md5: 09e45c598c24e26653c4bc4773060e73.dir
+      size: 18567355
+      nfiles: 65996
     - path: dataloader.py
       hash: md5
       md5: 43de0af168f77b45cd5665de043f9e84
@@ -109,12 +109,12 @@ stages:
       size: 762
     - path: train.py
       hash: md5
-      md5: cc000c94ba664d879c33250878497b8f
-      size: 1721
+      md5: a27b3d546c2811cba2f74d9bba69f830
+      size: 1715
     outs:
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 894449d19f2c40b2907e0aaebf3b6175
+      md5: bcb01fdbcc925a2c34e78099e842eb73
       size: 1828584
   test:
     cmd: python cli.py test
@@ -134,7 +134,7 @@ stages:
       size: 762
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 894449d19f2c40b2907e0aaebf3b6175
+      md5: bcb01fdbcc925a2c34e78099e842eb73
       size: 1828584
     - path: test.py
       hash: md5
