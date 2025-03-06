@@ -36,17 +36,20 @@ def train():
     for epoch in progress:
         model.train()
         total_loss = 0
+        samples_processed = 0
+        avg_loss = 0 if samples_processed == 0 else total_loss / samples_processed
 
         for images, labels in tqdm(
             train_loader, desc="Training batch", leave=False, position=1, unit="batch"
         ):
-            progress.set_postfix(training_loss=total_loss)
+            progress.set_postfix(training_loss=avg_loss)
             optimizer.zero_grad()
             output = model(images)
             loss = criterion(output, labels)
             loss.backward()
             optimizer.step()
             total_loss += loss.item()
+            samples_processed += len(images)
 
         with open(config.report_file, "a") as f:
             f.write(f"[{datetime.now()}] Epoch {epoch} loss: {total_loss}\n")
