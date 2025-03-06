@@ -99,6 +99,10 @@ stages:
       hash: md5
       md5: f60819c0faafe7625f54a4c593d01947
       size: 1207
+    - path: hypers.json
+      hash: md5
+      md5: bbb1244db840917b5eb2696b274b534f
+      size: 75
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
@@ -110,7 +114,7 @@ stages:
     outs:
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 19710bc4c92b49ef6731958964d8de97
+      md5: fc3c0bc697bc0b28acb6c6cc5af0a97e
       size: 1828584
   test:
     cmd: python cli.py test
@@ -130,7 +134,7 @@ stages:
       size: 762
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 19710bc4c92b49ef6731958964d8de97
+      md5: fc3c0bc697bc0b28acb6c6cc5af0a97e
       size: 1828584
     - path: test.py
       hash: md5
