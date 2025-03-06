@@ -46,6 +46,7 @@ stages:
       - dataloader.py
       - network.py
       - train.py
+      - hypers.json
     outs:
       - saved_models/scrambled_mnist.pth
 
