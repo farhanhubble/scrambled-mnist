@@ -6,7 +6,7 @@
     "data_dir": "./data",
     "seed": 57005,
     "scrambled_copies": 1,
-    "scramble_fraction": 0.05,
+    "scramble_fraction": 0.005,
     "saved_model_dir": "./saved_models",
     "model_name": "scrambled_mnist.pth",
     "report_file": "./report.txt"
