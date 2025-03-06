@@ -97,8 +97,8 @@ stages:
       nfiles: 65996
     - path: dataloader.py
       hash: md5
-      md5: 3ae144523b2069bf51270bc9cb1b1f74
-      size: 872
+      md5: f60819c0faafe7625f54a4c593d01947
+      size: 1207
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
@@ -122,8 +122,8 @@ stages:
       nfiles: 1
     - path: dataloader.py
       hash: md5
-      md5: 3ae144523b2069bf51270bc9cb1b1f74
-      size: 872
+      md5: f60819c0faafe7625f54a4c593d01947
+      size: 1207
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
@@ -134,5 +134,5 @@ stages:
       size: 1828584
     - path: test.py
       hash: md5
-      md5: d2c2acf471d08a2e9022b50bfd12f3f0
-      size: 955
+      md5: 2fc5e58407c94116495d1bac513d5ec5
+      size: 1779
