@@ -65,7 +65,7 @@ stages:
     deps:
     - path: augment.py
       hash: md5
-      md5: 8bac0a10f6a1981ab72d518c44463ae1
+      md5: 2ad88d1c4ca2b5ba326f7c4d0ca14b4f
       size: 2780
     - path: cli.py
       hash: md5
@@ -78,27 +78,27 @@ stages:
       nfiles: 60000
     params:
       config.json:
-        scramble_fraction: 0.05
+        scramble_fraction: 0.005
         scrambled_copies: 1
         seed: 57005
     outs:
     - path: data/train/augmented
       hash: md5
-      md5: 91f16e4ee33702e83e4758eddfa6fbcd.dir
-      size: 17533168
-      nfiles: 62996
+      md5: 3cda99f0f8814fd1c54de310591bf819.dir
+      size: 16604885
+      nfiles: 60295
   train:
     cmd: python cli.py train
     deps:
     - path: data/train/augmented
       hash: md5
-      md5: 91f16e4ee33702e83e4758eddfa6fbcd.dir
-      size: 17533168
-      nfiles: 62996
+      md5: 3cda99f0f8814fd1c54de310591bf819.dir
+      size: 16604885
+      nfiles: 60295
     - path: dataloader.py
       hash: md5
-      md5: f60819c0faafe7625f54a4c593d01947
-      size: 1207
+      md5: 43de0af168f77b45cd5665de043f9e84
+      size: 1111
     - path: hypers.json
       hash: md5
       md5: e7fe39e4129b646cbc0882e4d8bed5e0
@@ -109,12 +109,12 @@ stages:
       size: 762
     - path: train.py
       hash: md5
-      md5: b7c93e239a431f78c7377de843fd4d7b
-      size: 1565
+      md5: cc000c94ba664d879c33250878497b8f
+      size: 1721
     outs:
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 60b6fef054d77d73308674eede4861de
+      md5: 894449d19f2c40b2907e0aaebf3b6175
       size: 1828584
   test:
     cmd: python cli.py test
@@ -126,17 +126,17 @@ stages:
       nfiles: 1
     - path: dataloader.py
       hash: md5
-      md5: f60819c0faafe7625f54a4c593d01947
-      size: 1207
+      md5: 43de0af168f77b45cd5665de043f9e84
+      size: 1111
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
       size: 762
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: 60b6fef054d77d73308674eede4861de
+      md5: 894449d19f2c40b2907e0aaebf3b6175
       size: 1828584
     - path: test.py
       hash: md5
-      md5: 2fc5e58407c94116495d1bac513d5ec5
+      md5: 5dd6951577205c08d93019b811220342
       size: 1779

@@ -36,7 +36,7 @@ def augment(input_dir: str, output_dir: str, num_scrambled: int = 5, scramble_fr
     to_pil = transforms.ToPILImage()
 
     os.makedirs(output_dir, exist_ok=True)
-    scrambled_label_dir = os.path.join(output_dir, "69")
+    scrambled_label_dir = os.path.join(output_dir, "99")
     os.makedirs(scrambled_label_dir, exist_ok=True)
 
     for label in sorted(os.listdir(input_dir)):

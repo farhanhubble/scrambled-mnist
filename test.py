@@ -14,8 +14,8 @@ from network import CNN
 
 def create_confusion_matrix():
     data = np.zeros((11, 11), dtype=int)
-    columns = [str(i) for i in range(10)] + ["69"]
-    indices = [str(i) for i in range(10)] + ["69"]
+    columns = [str(i) for i in range(10)] + ["99"]
+    indices = [str(i) for i in range(10)] + ["99"]
     return pd.DataFrame(data, columns=columns, index=indices)
 
 def update_confusion_matrix(confusion_matrix, predicted, labels):

@@ -5,7 +5,7 @@ import json
 
 class2idx = {
     "0": 0, "1": 1, "2": 2, "3": 3, "4": 4,
-    "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "69": 10
+    "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "99": 10  # Use 99 for scrambled digits to ensure pytorch assigns it the last index
 }
 
 idx2class = {v: k for k, v in class2idx.items()}
@@ -25,11 +25,6 @@ def get_dataloaders():
     
     train_set = datasets.ImageFolder(root="data/train/augmented", transform=transform)
     test_set = datasets.ImageFolder(root="data/test/converted", transform=transform)
-
-    train_set.class_to_idx = class2idx
-    train_set.classes = list(class2idx.keys())
-    test_set.class_to_idx = class2idx
-    test_set.classes = list(class2idx.keys())
 
     train_loader = DataLoader(train_set, batch_size=hyperparams["batch_size"], shuffle=True)
     test_loader = DataLoader(test_set, batch_size=hyperparams["batch_size"], shuffle=False)
