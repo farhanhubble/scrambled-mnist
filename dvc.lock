@@ -97,8 +97,8 @@ stages:
       nfiles: 65996
     - path: dataloader.py
       hash: md5
-      md5: 961162a06905e9fced2fec772c464fa5
-      size: 904
+      md5: b7a340d83d2fcbc529c05cefa7f2b82f
+      size: 915
     - path: hypers.json
       hash: md5
       md5: e7fe39e4129b646cbc0882e4d8bed5e0
@@ -109,12 +109,12 @@ stages:
       size: 762
     - path: train.py
       hash: md5
-      md5: a7873115f2a2e84bcded63e8f6fffe81
-      size: 1730
+      md5: 42866d62226975ae3126efe69cfd6a1b
+      size: 1744
     outs:
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: b8acd9c27a52abd0c3ea61e4a4f8670e
+      md5: 5dcb55e1df4fdeebb2d693ba743cc253
       size: 1828584
   test:
     cmd: python cli.py test
@@ -126,20 +126,20 @@ stages:
       nfiles: 1
     - path: dataloader.py
       hash: md5
-      md5: 961162a06905e9fced2fec772c464fa5
-      size: 904
+      md5: b7a340d83d2fcbc529c05cefa7f2b82f
+      size: 915
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
       size: 762
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: b8acd9c27a52abd0c3ea61e4a4f8670e
+      md5: 5dcb55e1df4fdeebb2d693ba743cc253
       size: 1828584
     - path: test.py
       hash: md5
-      md5: 305d50686a77e0ca5bffd265d6350b33
-      size: 1840
+      md5: 49921719454632fa5a9f6a78c8eb9739
+      size: 1855
   download_mnist_c:
     cmd: python cli.py download-mnist-c
     deps:
@@ -232,8 +232,8 @@ stages:
       nfiles: 1120000
     - path: dataloader.py
       hash: md5
-      md5: 961162a06905e9fced2fec772c464fa5
-      size: 904
+      md5: b7a340d83d2fcbc529c05cefa7f2b82f
+      size: 915
     - path: ext_tests/mnist_c/test.py
       hash: md5
       md5: a89275a3eaa8d0ed91fa84ada0cf1212
@@ -244,9 +244,9 @@ stages:
       size: 762
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: b8acd9c27a52abd0c3ea61e4a4f8670e
+      md5: 5dcb55e1df4fdeebb2d693ba743cc253
       size: 1828584
     - path: test.py
       hash: md5
-      md5: 305d50686a77e0ca5bffd265d6350b33
-      size: 1840
+      md5: 49921719454632fa5a9f6a78c8eb9739
+      size: 1855
