@@ -140,3 +140,53 @@ stages:
       hash: md5
       md5: 5dd6951577205c08d93019b811220342
       size: 1779
+  download_mnist_c:
+    cmd: python cli.py download-mnist-c
+    deps:
+    - path: ext_tests/dwnld_mnist_c.py
+      hash: md5
+      md5: 794f64b45c0aa79b5aadeec239fdc9bf
+      size: 1785
+    params:
+      config.json:
+        mnist_c_aux_dataset: https://zenodo.org/records/3239543/files/mnist_c_leftovers.zip
+        mnist_c_main_dataset: https://zenodo.org/records/3239543/files/mnist_c.zip
+    outs:
+    - path: data/external/raw/mnist_c
+      hash: md5
+      md5: de2a622181ff51c44f1dadf5e10859ec.dir
+      size: 887048192
+      nfiles: 64
+    - path: data/external/raw/mnist_c_leftovers
+      hash: md5
+      md5: 6256cd7051eb0a7bfc4f7ab06c80f589.dir
+      size: 887048192
+      nfiles: 64
+  convert_mnist_c:
+    cmd: python cli.py convert-mnist-c
+    deps:
+    - path: data/external/raw/mnist_c
+      hash: md5
+      md5: de2a622181ff51c44f1dadf5e10859ec.dir
+      size: 887048192
+      nfiles: 64
+    - path: data/external/raw/mnist_c_leftovers
+      hash: md5
+      md5: 6256cd7051eb0a7bfc4f7ab06c80f589.dir
+      size: 887048192
+      nfiles: 64
+    - path: ext_tests/convert_mnist_c.py
+      hash: md5
+      md5: 970f696981e7e645f211d491bf356149
+      size: 2330
+    outs:
+    - path: data/external/converted/mnist_c
+      hash: md5
+      md5: e857288949b76f9c92c2b98cead4dc0f.dir
+      size: 368735671
+      nfiles: 1120000
+    - path: data/external/converted/mnist_c_leftovers
+      hash: md5
+      md5: 7060db1982474888c356fb3e5748f687.dir
+      size: 448158752
+      nfiles: 1120000
