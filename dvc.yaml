@@ -60,13 +60,24 @@ stages:
       - test.py
 
   download_mnist_c:
-    cmd: sh ext_tests/download_mnist_c.sh
+    cmd: python cli.py download-mnist-c
     deps:
-      - ext_tests/download_mnist_c.sh
+      - ext_tests/dwnld_mnist_c.py
     params:
       - config.json:
-        - mnist_c_train_file
-        - mnist_c_test_file
+        - mnist_c_main_dataset
+        - mnist_c_aux_dataset
     outs:
-      - data/train/external/mnist_c
-      - data/test/external/mnist_c_leftovers
+      - data/external/raw/mnist_c
+      - data/external/raw/mnist_c_leftovers
+
+
+  convert_mnist_c:
+    cmd: python cli.py convert-mnist-c
+    deps:
+      - data/external/raw/mnist_c
+      - data/external/raw/mnist_c_leftovers
+      - ext_tests/convert_mnist_c.py
+    outs:
+      - data/external/converted/mnist_c
+      - data/external/converted/mnist_c_leftovers
