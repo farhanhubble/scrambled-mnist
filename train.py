@@ -18,7 +18,7 @@ hyperparams = load_hyperparameters()
 
 
 def train():
-    train_loader = get_dataloader("data/train/augmented")
+    train_loader = get_dataloader("data/train/augmented", shuffle=True)
 
     model = CNN()
     optimizer = optim.Adam(model.parameters(), lr=hyperparams["learning_rate"])

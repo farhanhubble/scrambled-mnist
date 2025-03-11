@@ -28,7 +28,7 @@ def update_confusion_matrix(confusion_matrix, predicted, labels):
 
 def evaluate(data_path: str):
     print(f"Testing {data_path}")
-    test_loader = get_dataloader(data_path)
+    test_loader = get_dataloader(data_path, shuffle=False)
     model = CNN()
     model.load_state_dict(torch.load(config.saved_model_dir + "/" + config.model_name))
     model.eval()

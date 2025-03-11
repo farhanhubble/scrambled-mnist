@@ -16,7 +16,7 @@ def load_hyperparameters():
 
 hyperparams = load_hyperparameters()
 
-def get_dataloader(data_root):
+def get_dataloader(data_root, shuffle):
     transform = transforms.Compose([
         transforms.Grayscale(num_output_channels=1),
         transforms.ToTensor(),
@@ -24,6 +24,6 @@ def get_dataloader(data_root):
     ])
     
     dataetset = datasets.ImageFolder(root=data_root, transform=transform)
-    loader = DataLoader(dataetset, batch_size=hyperparams["batch_size"], shuffle=False)
+    loader = DataLoader(dataetset, batch_size=hyperparams["batch_size"], shuffle=shuffle)
 
     return loader
