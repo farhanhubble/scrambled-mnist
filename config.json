@@ -12,6 +12,6 @@
     "report_file": "./report.txt",
     "mnist_c_main_dataset": "https://zenodo.org/records/3239543/files/mnist_c.zip",
     "mnist_c_aux_dataset": "https://zenodo.org/records/3239543/files/mnist_c_leftovers.zip",
-    "tmp_dir": "./tmp",
-    "external_data_subdir": "external_data/raw"
+    "tmp_dir": "./.tmp",
+    "external_data_subdir": "external/raw"
 }

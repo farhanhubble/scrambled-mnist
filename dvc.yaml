@@ -65,11 +65,22 @@ stages:
       - ext_tests/mnist_c/download.py
     params:
       - config.json:
-        - mnist_c_main_dataset
-        - mnist_c_aux_dataset
+        - tmp_dir
     outs:
-      - data/external/raw/mnist_c
-      - data/external/raw/mnist_c_leftovers
+      - .tmp/mnist_c.zip
+      - .tmp/mnist_c_leftovers.zip
+
+  extract_mnist_c:
+    cmd: python cli.py extract-mnist-c
+    deps:
+      - ext_tests/mnist_c/extract.py
+    params:
+      - config.json:
+        - tmp_dir
+        - external_data_subdir
+    outs: 
+        - data/external/raw/mnist_c
+        - data/external/raw/mnist_c_leftovers
 
 
   convert_mnist_c:

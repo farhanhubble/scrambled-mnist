@@ -1,7 +1,6 @@
 import os
 import sys
 import urllib.request
-import zipfile
 from config import config
 from tqdm import tqdm
 
@@ -12,22 +11,20 @@ def download_mnist_c():
     AUX_DATASET = config.mnist_c_aux_dataset
 
     # Directory for external data
-    external_data_dir = "data/external/raw"
+    external_data_dir = os.path.join(config.data_dir, config.external_data_subdir)
     os.makedirs(external_data_dir, exist_ok=True)
 
-    # Download and extract the main dataset
-    _download_and_extract(
-        MAIN_DATASET, f"{external_data_dir}/mnist_c.zip", external_data_dir
-    )
+    # Download the main dataset
+    main_zip_path = os.path.join(config.tmp_dir, "mnist_c.zip")
+    _download_file(MAIN_DATASET, main_zip_path)
 
-    # Download and extract the auxiliary dataset
-    _download_and_extract(
-        AUX_DATASET, f"{external_data_dir}/mnist_c_leftovers.zip", external_data_dir
-    )
+    # Download the auxiliary dataset
+    aux_zip_path = os.path.join(config.tmp_dir, "mnist_c_leftovers.zip")
+    _download_file(AUX_DATASET, aux_zip_path)
 
 
-def _download_and_extract(url, output_zip, extract_to):
-    """Download a file from a URL and extract it to a directory."""
+def _download_file(url, output_zip):
+    """Download a file from a URL."""
 
     def _progress_hook(count, block_size, total_size):
         if _progress_hook.tqdm_obj is None:
@@ -46,13 +43,9 @@ def _download_and_extract(url, output_zip, extract_to):
         urllib.request.urlretrieve(url, output_zip, _progress_hook)
         if _progress_hook.tqdm_obj:
             _progress_hook.tqdm_obj.close()
-
-        print(f"Extracting {output_zip}...")
-        with zipfile.ZipFile(output_zip, "r") as zip_ref:
-            zip_ref.extractall(extract_to)
-
-        print(f"Removing {output_zip}...")
-        os.remove(output_zip)
-        print("Done!")
+        print("Download complete!")
     except Exception as e:
-        sys.exit(f"Error processing {url}: {e}")
+        sys.exit(f"Error downloading {url}: {e}")
+
+
+

@@ -6,8 +6,9 @@ from augment import augment as augment_data
 from seed import seed
 from train import train as do_train
 from test import evaluate as do_evaluate
-from ext_tests.download import download_mnist_c as _download_mnist_c
-from ext_tests.convert import convert_mnist_c as _convert_mnist_c
+from ext_tests.mnist_c.download import download_mnist_c as _download_mnist_c
+from ext_tests.mnist_c.extract import extract_mnist_c as _extract_mnist_c
+from ext_tests.mnist_c.convert import convert_mnist_c as _convert_mnist_c
 
 seed()
 app = typer.Typer()
@@ -55,6 +56,10 @@ def test():
 @app.command(help="Download MNIST-C data")
 def download_mnist_c():
     _download_mnist_c()
+
+@app.command(help="Extract MNIST-C data")
+def extract_mnist_c():
+    _extract_mnist_c()
 
 
 @app.command(help="Convert MNIST-C data to PNG images")
