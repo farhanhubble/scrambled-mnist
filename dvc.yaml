@@ -58,3 +58,15 @@ stages:
       - dataloader.py
       - network.py
       - test.py
+
+  download_mnist_c:
+    cmd: sh ext_tests/download_mnist_c.sh
+    deps:
+      - ext_tests/download_mnist_c.sh
+    params:
+      - config.json:
+        - mnist_c_train_file
+        - mnist_c_test_file
+    outs:
+      - data/train/external/mnist_c
+      - data/test/external/mnist_c_leftovers
