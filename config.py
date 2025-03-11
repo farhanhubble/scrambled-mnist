@@ -17,6 +17,8 @@ class Config(BaseModel):
     report_file: str
     mnist_c_main_dataset: str = Field(..., description="URL for Google MNIST-C main datset")
     mnist_c_aux_dataset: str = Field(..., description="URL for Google MNIST-C aux dataset")
+    tmp_dir: str = Field(..., description="Temporary directory for external data")
+    external_data_subdir: str = Field(..., description="Subdirectory for external data, relative to data_dir")
 
 
 
