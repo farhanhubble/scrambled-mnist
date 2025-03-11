@@ -28,3 +28,6 @@ def set_env(config: Config):
 
 config = load_config()
 set_env(config)
+
+if __name__ == "__main__":
+    print(config.model_dump_json(indent=2))
