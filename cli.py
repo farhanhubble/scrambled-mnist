@@ -6,8 +6,8 @@ from augment import augment as augment_data
 from seed import seed
 from train import train as do_train
 from test import evaluate as do_evaluate
-from ext_tests.dwnld_mnist_c import download_mnist_c as _download_mnist_c
-from ext_tests.convert_mnist_c import convert_mnist_c as _convert_mnist_c
+from ext_tests.download import download_mnist_c as _download_mnist_c
+from ext_tests.convert import convert_mnist_c as _convert_mnist_c
 
 seed()
 app = typer.Typer()

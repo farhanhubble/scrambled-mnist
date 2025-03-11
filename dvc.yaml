@@ -62,7 +62,7 @@ stages:
   download_mnist_c:
     cmd: python cli.py download-mnist-c
     deps:
-      - ext_tests/dwnld_mnist_c.py
+      - ext_tests/mnist_c/download.py
     params:
       - config.json:
         - mnist_c_main_dataset
@@ -77,7 +77,7 @@ stages:
     deps:
       - data/external/raw/mnist_c
       - data/external/raw/mnist_c_leftovers
-      - ext_tests/convert_mnist_c.py
+      - ext_tests/mnist_c/convert.py
     outs:
       - data/external/converted/mnist_c
       - data/external/converted/mnist_c_leftovers
