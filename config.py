@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 import json
-from pydantic import FilePath
+import os
 
 
 class Config(BaseModel):
@@ -20,6 +20,11 @@ class Config(BaseModel):
 def load_config(path="config.json") -> Config:
     with open(path, "r") as f:
         return Config(**json.load(f))
+    
+def set_env(config: Config):
+    for key, value in config.model_dump().items():
+        os.environ[key] = str(value)
 
 
 config = load_config()
+set_env(config)
