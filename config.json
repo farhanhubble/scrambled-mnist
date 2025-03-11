@@ -9,5 +9,7 @@
     "scramble_fraction": 0.1,
     "saved_model_dir": "./saved_models",
     "model_name": "scrambled_mnist.pth",
-    "report_file": "./report.txt"
+    "report_file": "./report.txt",
+    "mnist_c_main_dataset": "https://zenodo.org/records/3239543/files/mnist_c.zip",
+    "mnist_c_aux_dataset": "https://zenodo.org/records/3239543/files/mnist_c_leftovers.zip"
 }

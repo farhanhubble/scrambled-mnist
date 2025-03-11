@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, FilePath
 import json
 import os
 
@@ -15,6 +15,9 @@ class Config(BaseModel):
     saved_model_dir: str
     model_name: str
     report_file: str
+    mnist_c_main_dataset: str = Field(..., description="URL for Google MNIST-C main datset")
+    mnist_c_aux_dataset: str = Field(..., description="URL for Google MNIST-C aux dataset")
+
 
 
 def load_config(path="config.json") -> Config:
