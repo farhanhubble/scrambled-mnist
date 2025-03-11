@@ -8,7 +8,7 @@ import pandas as pd
 from tqdm import tqdm
 
 from config import config
-from dataloader import get_dataloaders, idx2class
+from dataloader import get_dataloader, idx2class
 from network import CNN
 
 
@@ -18,6 +18,7 @@ def create_confusion_matrix():
     indices = [str(i) for i in range(10)] + ["99"]
     return pd.DataFrame(data, columns=columns, index=indices)
 
+
 def update_confusion_matrix(confusion_matrix, predicted, labels):
     predicted = predicted.cpu().numpy()
     labels = labels.cpu().numpy()
@@ -25,8 +26,9 @@ def update_confusion_matrix(confusion_matrix, predicted, labels):
         confusion_matrix.loc[idx2class[labels[i]], idx2class[predicted[i]]] += 1
 
 
-def evaluate():
-    _, test_loader = get_dataloaders()
+def evaluate(data_path: str):
+    print(f"Testing {data_path}")
+    test_loader = get_dataloader(data_path)
     model = CNN()
     model.load_state_dict(torch.load(config.saved_model_dir + "/" + config.model_name))
     model.eval()
@@ -35,7 +37,7 @@ def evaluate():
 
     correct, total = 0, 0
     with open(config.report_file, "a") as f:
-        f.write(f"[{datetime.now()}] Testing started\n")
+        f.write(f"\n\n[{datetime.now()}] Testing {data_path}\n")
     with torch.no_grad():
         for images, labels in tqdm(test_loader, desc="Evaluating", unit="batch"):
             outputs = model(images)
@@ -49,4 +51,4 @@ def evaluate():
     with open(config.report_file, "a") as f:
         f.write(f"[{datetime.now()}] Test accuracy: {test_accuracy}\n")
         f.write(f"[{datetime.now()}] Confusion matrix:\n")
-        confusion_matrix.to_markdown(f, 'a')
+        confusion_matrix.to_markdown(f, "a")

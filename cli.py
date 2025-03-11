@@ -9,6 +9,7 @@ from test import evaluate as do_evaluate
 from ext_tests.mnist_c.download import download_mnist_c as _download_mnist_c
 from ext_tests.mnist_c.extract import extract_mnist_c as _extract_mnist_c
 from ext_tests.mnist_c.convert import convert_mnist_c as _convert_mnist_c
+from ext_tests.mnist_c.test import test_mnist_c as _test_mnist_c
 
 seed()
 app = typer.Typer()
@@ -50,7 +51,7 @@ def train():
 
 @app.command(help="Evaluate the model")
 def test():
-    do_evaluate()
+    do_evaluate("data/test/converted")
 
 
 @app.command(help="Download MNIST-C data")
@@ -65,6 +66,10 @@ def extract_mnist_c():
 @app.command(help="Convert MNIST-C data to PNG images")
 def convert_mnist_c():
     _convert_mnist_c()
+
+@app.command(help="Evaluate the model on MNIST-C")
+def test_mnist_c():
+    _test_mnist_c(config.data_dir + "/external/converted")
 
 
 if __name__ == "__main__":

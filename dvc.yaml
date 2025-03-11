@@ -74,6 +74,8 @@ stages:
     cmd: python cli.py extract-mnist-c
     deps:
       - ext_tests/mnist_c/extract.py
+      - .tmp/mnist_c.zip
+      - .tmp/mnist_c_leftovers.zip
     params:
       - config.json:
         - tmp_dir
@@ -92,3 +94,15 @@ stages:
     outs:
       - data/external/converted/mnist_c
       - data/external/converted/mnist_c_leftovers
+
+
+  test_mnist_c:
+    cmd: python cli.py test-mnist-c
+    deps:
+      - data/external/converted/mnist_c
+      - data/external/converted/mnist_c_leftovers
+      - dataloader.py
+      - network.py
+      - test.py
+      - ext_tests/mnist_c/test.py
+      - saved_models/scrambled_mnist.pth

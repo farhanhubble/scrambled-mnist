@@ -1,7 +1,7 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-from dataloader import get_dataloaders
+from dataloader import get_dataloader
 from network import CNN
 import json
 from tqdm import tqdm
@@ -18,7 +18,7 @@ hyperparams = load_hyperparameters()
 
 
 def train():
-    train_loader, _ = get_dataloaders()
+    train_loader = get_dataloader("data/train/augmented")
 
     model = CNN()
     optimizer = optim.Adam(model.parameters(), lr=hyperparams["learning_rate"])
@@ -52,7 +52,7 @@ def train():
             samples_processed += 1
 
         with open(config.report_file, "a") as f:
-            f.write(f"[{datetime.now()}] Epoch {epoch} loss: {total_loss}\n")
+            f.write(f"[{datetime.now()}] Epoch {epoch} loss: {avg_loss}\n")
 
     os.makedirs(config.saved_model_dir, exist_ok=True)
     torch.save(model.state_dict(), config.saved_model_dir + "/" + config.model_name)

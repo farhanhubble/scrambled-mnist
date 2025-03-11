@@ -16,17 +16,14 @@ def load_hyperparameters():
 
 hyperparams = load_hyperparameters()
 
-def get_dataloaders():
+def get_dataloader(data_root):
     transform = transforms.Compose([
         transforms.Grayscale(num_output_channels=1),
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,))  # MNIST normalization
     ])
     
-    train_set = datasets.ImageFolder(root="data/train/augmented", transform=transform)
-    test_set = datasets.ImageFolder(root="data/test/converted", transform=transform)
+    dataetset = datasets.ImageFolder(root=data_root, transform=transform)
+    loader = DataLoader(dataetset, batch_size=hyperparams["batch_size"], shuffle=False)
 
-    train_loader = DataLoader(train_set, batch_size=hyperparams["batch_size"], shuffle=True)
-    test_loader = DataLoader(test_set, batch_size=hyperparams["batch_size"], shuffle=False)
-
-    return train_loader, test_loader
+    return loader

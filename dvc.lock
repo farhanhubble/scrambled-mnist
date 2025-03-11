@@ -5,8 +5,8 @@ stages:
     deps:
     - path: cli.py
       hash: md5
-      md5: 33dfb98290267ebb91eec8a20037ae4f
-      size: 1260
+      md5: 23b0cc5e7ee315d705b6c1b1c3ab1139
+      size: 1988
     - path: download.py
       hash: md5
       md5: 0c788e391dbe4894b3b137246bc90ea8
@@ -33,8 +33,8 @@ stages:
     deps:
     - path: cli.py
       hash: md5
-      md5: 33dfb98290267ebb91eec8a20037ae4f
-      size: 1260
+      md5: 23b0cc5e7ee315d705b6c1b1c3ab1139
+      size: 1988
     - path: convert.py
       hash: md5
       md5: ebad11d340680a65f667bb81da75897e
@@ -69,8 +69,8 @@ stages:
       size: 2780
     - path: cli.py
       hash: md5
-      md5: 33dfb98290267ebb91eec8a20037ae4f
-      size: 1260
+      md5: 23b0cc5e7ee315d705b6c1b1c3ab1139
+      size: 1988
     - path: data/train/converted
       hash: md5
       md5: d1bc4c2136fd04dc8f2083fd5581d695.dir
@@ -84,21 +84,21 @@ stages:
     outs:
     - path: data/train/augmented
       hash: md5
-      md5: 09e45c598c24e26653c4bc4773060e73.dir
-      size: 18567355
+      md5: 1b5edcb449a4fecb56bb428334806103.dir
+      size: 18574922
       nfiles: 65996
   train:
     cmd: python cli.py train
     deps:
     - path: data/train/augmented
       hash: md5
-      md5: 09e45c598c24e26653c4bc4773060e73.dir
-      size: 18567355
+      md5: 1b5edcb449a4fecb56bb428334806103.dir
+      size: 18574922
       nfiles: 65996
     - path: dataloader.py
       hash: md5
-      md5: 43de0af168f77b45cd5665de043f9e84
-      size: 1111
+      md5: 961162a06905e9fced2fec772c464fa5
+      size: 904
     - path: hypers.json
       hash: md5
       md5: e7fe39e4129b646cbc0882e4d8bed5e0
@@ -109,12 +109,12 @@ stages:
       size: 762
     - path: train.py
       hash: md5
-      md5: a27b3d546c2811cba2f74d9bba69f830
-      size: 1715
+      md5: a7873115f2a2e84bcded63e8f6fffe81
+      size: 1730
     outs:
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: bcb01fdbcc925a2c34e78099e842eb73
+      md5: b8acd9c27a52abd0c3ea61e4a4f8670e
       size: 1828584
   test:
     cmd: python cli.py test
@@ -126,42 +126,39 @@ stages:
       nfiles: 1
     - path: dataloader.py
       hash: md5
-      md5: 43de0af168f77b45cd5665de043f9e84
-      size: 1111
+      md5: 961162a06905e9fced2fec772c464fa5
+      size: 904
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
       size: 762
     - path: saved_models/scrambled_mnist.pth
       hash: md5
-      md5: bcb01fdbcc925a2c34e78099e842eb73
+      md5: b8acd9c27a52abd0c3ea61e4a4f8670e
       size: 1828584
     - path: test.py
       hash: md5
-      md5: 5dd6951577205c08d93019b811220342
-      size: 1779
+      md5: 305d50686a77e0ca5bffd265d6350b33
+      size: 1840
   download_mnist_c:
     cmd: python cli.py download-mnist-c
     deps:
-    - path: ext_tests/dwnld_mnist_c.py
+    - path: ext_tests/mnist_c/download.py
       hash: md5
-      md5: 794f64b45c0aa79b5aadeec239fdc9bf
-      size: 1785
+      md5: 305cc71d4a63001a0f97a230b7775d19
+      size: 1536
     params:
       config.json:
-        mnist_c_aux_dataset: https://zenodo.org/records/3239543/files/mnist_c_leftovers.zip
-        mnist_c_main_dataset: https://zenodo.org/records/3239543/files/mnist_c.zip
+        tmp_dir: ./.tmp
     outs:
-    - path: data/external/raw/mnist_c
+    - path: .tmp/mnist_c.zip
       hash: md5
-      md5: de2a622181ff51c44f1dadf5e10859ec.dir
-      size: 887048192
-      nfiles: 64
-    - path: data/external/raw/mnist_c_leftovers
+      md5: 4b34b33045869ee6d424616cd3a65da3
+      size: 246661575
+    - path: .tmp/mnist_c_leftovers.zip
       hash: md5
-      md5: 6256cd7051eb0a7bfc4f7ab06c80f589.dir
-      size: 887048192
-      nfiles: 64
+      md5: c365e9c25addd5c24454b19ac7101070
+      size: 329676575
   convert_mnist_c:
     cmd: python cli.py convert-mnist-c
     deps:
@@ -175,7 +172,7 @@ stages:
       md5: 6256cd7051eb0a7bfc4f7ab06c80f589.dir
       size: 887048192
       nfiles: 64
-    - path: ext_tests/convert_mnist_c.py
+    - path: ext_tests/mnist_c/convert.py
       hash: md5
       md5: 970f696981e7e645f211d491bf356149
       size: 2330
@@ -190,3 +187,66 @@ stages:
       md5: 7060db1982474888c356fb3e5748f687.dir
       size: 448158752
       nfiles: 1120000
+  extract_mnist_c:
+    cmd: python cli.py extract-mnist-c
+    deps:
+    - path: .tmp/mnist_c.zip
+      hash: md5
+      md5: 4b34b33045869ee6d424616cd3a65da3
+      size: 246661575
+    - path: .tmp/mnist_c_leftovers.zip
+      hash: md5
+      md5: c365e9c25addd5c24454b19ac7101070
+      size: 329676575
+    - path: ext_tests/mnist_c/extract.py
+      hash: md5
+      md5: 7fd6a8b2d8bb631efc4585bde1606a96
+      size: 949
+    params:
+      config.json:
+        external_data_subdir: external/raw
+        tmp_dir: ./.tmp
+    outs:
+    - path: data/external/raw/mnist_c
+      hash: md5
+      md5: de2a622181ff51c44f1dadf5e10859ec.dir
+      size: 887048192
+      nfiles: 64
+    - path: data/external/raw/mnist_c_leftovers
+      hash: md5
+      md5: 6256cd7051eb0a7bfc4f7ab06c80f589.dir
+      size: 887048192
+      nfiles: 64
+  test_mnist_c:
+    cmd: python cli.py test-mnist-c
+    deps:
+    - path: data/external/converted/mnist_c
+      hash: md5
+      md5: e857288949b76f9c92c2b98cead4dc0f.dir
+      size: 368735671
+      nfiles: 1120000
+    - path: data/external/converted/mnist_c_leftovers
+      hash: md5
+      md5: 7060db1982474888c356fb3e5748f687.dir
+      size: 448158752
+      nfiles: 1120000
+    - path: dataloader.py
+      hash: md5
+      md5: 961162a06905e9fced2fec772c464fa5
+      size: 904
+    - path: ext_tests/mnist_c/test.py
+      hash: md5
+      md5: a89275a3eaa8d0ed91fa84ada0cf1212
+      size: 481
+    - path: network.py
+      hash: md5
+      md5: 397626903283aaffa3cc8a589c802cd0
+      size: 762
+    - path: saved_models/scrambled_mnist.pth
+      hash: md5
+      md5: b8acd9c27a52abd0c3ea61e4a4f8670e
+      size: 1828584
+    - path: test.py
+      hash: md5
+      md5: 305d50686a77e0ca5bffd265d6350b33
+      size: 1840
