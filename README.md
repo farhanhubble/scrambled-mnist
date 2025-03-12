@@ -18,5 +18,13 @@ This repository trains a barebones neural network on a dataset made up of regula
     - Augment the training dataset by scrambling a fraction of the dataset and assigning it a distinct label
     - Train a convnet to learn all 11 labels
     - Test the convnet on the standard 10 labels 
+    - Download the [MNIST-C][MNIST_C] dataset that contains MNIST-derived images corrupted by various types of noise
+    - Evaluate the model's performance on MNIST_C test set
+- Optionally check out `exp_nonoise` branch and
+    - Run `dvc repro` to retrain the convnet on the orignial MNIST set by reducing the fraction of augmented images to just 0.005. This reruns all the evaluations from above
+    - Compare the report.txt file from the `main` and `exp_nonoise`
+
 
 > If you face any problems or have questions, create a new issue here on Github.
+
+[MNIST_C]: https://github.com/google-research/mnist-c
