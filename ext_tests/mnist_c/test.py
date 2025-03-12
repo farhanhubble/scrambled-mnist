@@ -4,7 +4,7 @@ from test import evaluate
 
 
 def _test_mnist_c(data_root: str):
-    subdirs = os.listdir(data_root)
+    subdirs = sorted(os.listdir(data_root))
     for subdir in subdirs:
         if os.path.isdir(os.path.join(data_root, subdir)):
             test_data_path = os.path.join(data_root, subdir, "test")
