@@ -236,8 +236,8 @@ stages:
       size: 915
     - path: ext_tests/mnist_c/test.py
       hash: md5
-      md5: a89275a3eaa8d0ed91fa84ada0cf1212
-      size: 481
+      md5: 3228680d030be93fdf017ee9402b048e
+      size: 489
     - path: network.py
       hash: md5
       md5: 397626903283aaffa3cc8a589c802cd0
